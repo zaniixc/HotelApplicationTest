@@ -185,6 +185,7 @@ namespace HotelApplication.Forms.Dashboard
             txtSearch.BorderColor = Color.FromArgb(60, 60, 60);
             txtSearch.BorderFocusColor = Color.FromArgb(100, 149, 237);
             txtSearch.BorderRadius = 10;
+            txtSearch.ForeColor = Color.White;
             txtSearch.Location = new Point(30, 14);
             txtSearch.Multiline = false;
             txtSearch.Name = "txtSearch";
