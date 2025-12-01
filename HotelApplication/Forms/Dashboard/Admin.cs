@@ -33,12 +33,12 @@ namespace HotelApplication.Forms.Dashboard
         private void SetupManualUI()
         {
             this.Size = new Size(800, 600);
-            this.BackColor = HotelPalette.MainBackground;
+            this.BackColor = Color.FromArgb(34, 40, 49);
 
             // 1. Header Area
             lblTitle = new Label();
             lblTitle.Text = "User Management";
-            lblTitle.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+            lblTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             lblTitle.ForeColor = HotelPalette.TextPrimary;
             lblTitle.Location = new Point(20, 20);
             lblTitle.AutoSize = true;
@@ -47,23 +47,23 @@ namespace HotelApplication.Forms.Dashboard
             txtSearch = new UITextBox();
             txtSearch.PlaceholderText = "Search staff by name...";
             txtSearch.Location = new Point(20, 70);
-            txtSearch.Size = new Size(300, 35);
-            txtSearch.BorderRadius = 15;
-            txtSearch.BackColor = HotelPalette.MainBackground;
-            txtSearch.BorderColor = HotelPalette.Border;
+            txtSearch.Size = new Size(300, 36);
+            txtSearch.BorderRadius = 10;
+            txtSearch.BackColor = Color.FromArgb(238, 238, 238);
+            txtSearch.BorderColor = Color.FromArgb(238, 238, 238);
             txtSearch._TextChanged += TxtSearch_TextChanged;
 
             // 3. Action Buttons
-            btnAddUser = CreateButton("Add Staff", HotelPalette.Accent, 340);
-            btnEditUser = CreateButton("Edit Selected", HotelPalette.Surface, 500);
-            btnDeleteUser = CreateButton("Deactivate", Color.IndianRed, 660);
+            btnAddUser = CreateButton("Add Staff", Color.FromArgb(0, 0, 255), 340);
+            btnEditUser = CreateButton("Edit Selected", Color.FromArgb(57, 62, 70), 480);
+            btnDeleteUser = CreateButton("Deactivate", Color.FromArgb(255, 0, 0), 620);
 
             // 4. Data Grid View (The list)
             dgvUsers = new DataGridView();
-            dgvUsers.Location = new Point(20, 120);
+            dgvUsers.Location = new Point(20, 130);
             dgvUsers.Size = new Size(760, 460);
             dgvUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvUsers.BackgroundColor = HotelPalette.Surface;
+            dgvUsers.BackgroundColor = Color.FromArgb(34, 40, 49);
             dgvUsers.BorderStyle = BorderStyle.None;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUsers.ReadOnly = true;
@@ -92,9 +92,10 @@ namespace HotelApplication.Forms.Dashboard
         {
             RoundedButton btn = new RoundedButton();
             btn.Text = text;
+            btn.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             btn.BackColor = bg;
-            btn.ForeColor = Color.White;
-            btn.Size = new Size(140, 35);
+            btn.ForeColor = Color.FromArgb(238, 238, 238);
+            btn.Size = new Size(122, 36);
             btn.Location = new Point(x, 70);
             btn.BorderRadius = 10;
             btn.Click += ActionButton_Click;

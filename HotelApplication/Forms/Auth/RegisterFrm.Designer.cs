@@ -43,7 +43,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.FromArgb(238, 238, 238);
             label1.Location = new Point(278, 154);
             label1.Name = "label1";
             label1.Size = new Size(93, 28);
@@ -55,7 +55,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.ForeColor = Color.White;
+            label2.ForeColor = Color.FromArgb(238, 238, 238);
             label2.Location = new Point(275, 70);
             label2.Name = "label2";
             label2.Size = new Size(99, 28);
@@ -64,7 +64,7 @@
             // 
             // txt_Username
             // 
-            txt_Username.BackColor = Color.FromArgb(32, 32, 32);
+            txt_Username.BackColor = Color.FromArgb(57, 62, 70);
             txt_Username.BorderColor = Color.FromArgb(60, 60, 60);
             txt_Username.BorderFocusColor = Color.FromArgb(100, 149, 237);
             txt_Username.BorderRadius = 10;
@@ -81,7 +81,7 @@
             // 
             // txt_Password
             // 
-            txt_Password.BackColor = Color.FromArgb(32, 32, 32);
+            txt_Password.BackColor = Color.FromArgb(57, 62, 70);
             txt_Password.BorderColor = Color.FromArgb(60, 60, 60);
             txt_Password.BorderFocusColor = Color.FromArgb(100, 149, 237);
             txt_Password.BorderRadius = 10;
@@ -112,43 +112,48 @@
             // 
             // btnRegister
             // 
-            btnRegister.BackColor = Color.FromArgb(64, 64, 64);
-            btnRegister.BorderRadius = 8;
+            btnRegister.BackColor = Color.FromArgb(0, 173, 181);
+            btnRegister.BackgroundColor = Color.FromArgb(0, 173, 181);
+            btnRegister.BorderRadius = 10;
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(264, 275);
+            btnRegister.Location = new Point(262, 275);
             btnRegister.Name = "btnRegister";
             btnRegister.PressColor = Color.FromArgb(100, 100, 100);
-            btnRegister.Size = new Size(120, 50);
+            btnRegister.Size = new Size(122, 50);
             btnRegister.TabIndex = 14;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = false;
             // 
             // exitBtn
             // 
-            exitBtn.BackColor = Color.FromArgb(64, 64, 64);
+            exitBtn.BackColor = Color.FromArgb(34, 40, 49);
+            exitBtn.BackgroundColor = Color.FromArgb(34, 40, 49);
+            exitBtn.BorderRadius = 0;
             exitBtn.FlatAppearance.BorderSize = 0;
             exitBtn.FlatStyle = FlatStyle.Flat;
-            exitBtn.Font = new Font("Segoe UI", 12F);
+            exitBtn.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             exitBtn.ForeColor = Color.White;
             exitBtn.Location = new Point(609, 7);
             exitBtn.Margin = new Padding(3, 4, 3, 4);
             exitBtn.Name = "exitBtn";
             exitBtn.PressColor = Color.FromArgb(100, 100, 100);
             exitBtn.Size = new Size(32, 32);
-            exitBtn.TabIndex = 1;
+            exitBtn.TabIndex = 2;
             exitBtn.Text = "X";
             exitBtn.UseVisualStyleBackColor = false;
             exitBtn.Click += exitBtn_Click;
             // 
             // minimizeBtn
             // 
-            minimizeBtn.BackColor = Color.FromArgb(64, 64, 64);
+            minimizeBtn.BackColor = Color.FromArgb(34, 40, 49);
+            minimizeBtn.BackgroundColor = Color.FromArgb(34, 40, 49);
+            minimizeBtn.BorderRadius = 0;
             minimizeBtn.FlatAppearance.BorderSize = 0;
             minimizeBtn.FlatStyle = FlatStyle.Flat;
             minimizeBtn.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             minimizeBtn.ForeColor = Color.White;
-            minimizeBtn.Location = new Point(565, 7);
+            minimizeBtn.Location = new Point(570, 7);
             minimizeBtn.Margin = new Padding(3, 4, 3, 4);
             minimizeBtn.Name = "minimizeBtn";
             minimizeBtn.PressColor = Color.FromArgb(100, 100, 100);
@@ -162,7 +167,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(20, 20, 20);
+            BackColor = Color.FromArgb(34, 40, 49);
             BorderColor = Color.Black;
             BorderSize = 1;
             ClientSize = new Size(649, 419);

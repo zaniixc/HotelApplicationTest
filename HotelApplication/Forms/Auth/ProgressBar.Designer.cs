@@ -35,7 +35,7 @@
             // uiProgressBar1
             // 
             uiProgressBar1.BackColor = Color.FromArgb(20, 20, 20);
-            uiProgressBar1.ChannelColor = Color.FromArgb(32, 32, 32);
+            uiProgressBar1.ChannelColor = Color.FromArgb(57, 62, 70);
             uiProgressBar1.ForeColor = Color.FromArgb(230, 230, 230);
             uiProgressBar1.Location = new Point(99, 105);
             uiProgressBar1.Margin = new Padding(3, 4, 3, 4);
@@ -43,7 +43,7 @@
             uiProgressBar1.Name = "uiProgressBar1";
             uiProgressBar1.ShowValue = false;
             uiProgressBar1.Size = new Size(457, 36);
-            uiProgressBar1.SliderColor = Color.FromArgb(100, 149, 237);
+            uiProgressBar1.SliderColor = Color.FromArgb(0, 173, 181);
             uiProgressBar1.TabIndex = 0;
             uiProgressBar1.Text = "uiProgressBar1";
             uiProgressBar1.Value = 0;
@@ -52,7 +52,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 16F);
-            label3.ForeColor = Color.White;
+            label3.ForeColor = Color.FromArgb(238, 238, 238);
             label3.Location = new Point(288, 150);
             label3.Name = "label3";
             label3.Size = new Size(88, 37);
@@ -63,7 +63,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(20, 20, 20);
+            BackColor = Color.FromArgb(34, 40, 49);
             BorderColor = Color.Black;
             BorderSize = 1;
             ClientSize = new Size(655, 260);

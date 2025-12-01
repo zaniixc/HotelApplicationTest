@@ -14,14 +14,16 @@ namespace HotelApplication.Forms.Dashboard
         private void SetupManualUI()
         {
             this.Size = new Size(800, 600);
-            this.BackColor = HotelPalette.MainBackground;
+            this.BackColor = Color.FromArgb(34, 40, 49);
             // 1. Header Area
             lblTitle = new Label();
-            lblTitle.Text = "Dashboard";
-            lblTitle.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+            lblTitle.Text = "Dashboard Management";
+            lblTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             lblTitle.ForeColor = HotelPalette.TextPrimary;
             lblTitle.Location = new Point(20, 20);
             lblTitle.AutoSize = true;
+
+            // Add controls to UserControl
             this.Controls.Add(lblTitle);
         }
         private void LoadMockData()
