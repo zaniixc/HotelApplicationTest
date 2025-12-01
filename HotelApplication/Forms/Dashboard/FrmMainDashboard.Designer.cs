@@ -84,7 +84,7 @@ namespace HotelApplication.Forms.Dashboard
             // 
             // leftPanel
             // 
-            leftPanel.BackColor = Color.FromArgb(20, 20, 20);
+            leftPanel.BackColor = Color.FromArgb(32, 32, 32);
             leftPanel.Controls.Add(btnLogout);
             leftPanel.Controls.Add(btnSettings);
             leftPanel.Controls.Add(btnUsers);
@@ -246,7 +246,7 @@ namespace HotelApplication.Forms.Dashboard
             lblTotalSalesValue.ForeColor = Color.FromArgb(230, 230, 230);
             lblTotalSalesValue.Location = new Point(12, 40);
             lblTotalSalesValue.Name = "lblTotalSalesValue";
-            lblTotalSalesValue.Size = new Size(100, 45);
+            lblTotalSalesValue.Size = new Size(395, 45);
             lblTotalSalesValue.TabIndex = 1;
             lblTotalSalesValue.Text = "₱0";
             // 
@@ -276,7 +276,7 @@ namespace HotelApplication.Forms.Dashboard
             lblNewUsersValue.ForeColor = Color.FromArgb(230, 230, 230);
             lblNewUsersValue.Location = new Point(12, 40);
             lblNewUsersValue.Name = "lblNewUsersValue";
-            lblNewUsersValue.Size = new Size(100, 45);
+            lblNewUsersValue.Size = new Size(175, 45);
             lblNewUsersValue.TabIndex = 1;
             lblNewUsersValue.Text = "0";
             // 

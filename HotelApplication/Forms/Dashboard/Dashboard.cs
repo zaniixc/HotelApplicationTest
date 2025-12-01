@@ -1,20 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using static HotelApplication.Components.RoundedCorners;
 
 namespace HotelApplication.Forms.Dashboard
 {
     public partial class Dashboard : UserControl
     {
+        private Label lblTitle;
         public Dashboard()
         {
             InitializeComponent();
+            SetupManualUI();
+            LoadMockData();
+        }
+        private void SetupManualUI()
+        {
+            this.Size = new Size(800, 600);
+            this.BackColor = HotelPalette.MainBackground;
+            // 1. Header Area
+            lblTitle = new Label();
+            lblTitle.Text = "Dashboard";
+            lblTitle.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+            lblTitle.ForeColor = HotelPalette.TextPrimary;
+            lblTitle.Location = new Point(20, 20);
+            lblTitle.AutoSize = true;
+            this.Controls.Add(lblTitle);
+        }
+        private void LoadMockData()
+        {
+            // Load any mock data if necessary
         }
     }
 }
