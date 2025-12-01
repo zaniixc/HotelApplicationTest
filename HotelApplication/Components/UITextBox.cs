@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using static HotelApplication.Components.RoundedCorners;
+
 
 namespace HotelApp.UI.Components
 {
@@ -11,10 +11,10 @@ namespace HotelApp.UI.Components
     public class UITextBox : UserControl
     {
        
-        private Color borderColor = HotelPalette.Border;
+        private Color borderColor = HotelApplication.Components.RoundedCorners.HotelPalette.Border;
         private int borderSize = 2;
         private bool underlinedStyle = false;
-        private Color borderFocusColor = HotelPalette.Accent;
+        private Color borderFocusColor = HotelApplication.Components.RoundedCorners.HotelPalette.Accent;
         private bool isFocused = false;
         private int borderRadius = 10; 
         private Color placeholderColor = Color.DarkGray;
@@ -36,8 +36,8 @@ namespace HotelApp.UI.Components
             // Setup the inner TextBox
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Dock = DockStyle.Fill;
-            textBox1.BackColor = HotelPalette.Surface;
-            textBox1.ForeColor = HotelPalette.TextPrimary;
+            textBox1.BackColor = HotelApplication.Components.RoundedCorners.HotelPalette.Surface;
+            textBox1.ForeColor = HotelApplication.Components.RoundedCorners.HotelPalette.TextPrimary;
             textBox1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
 
             // Hook up events
@@ -49,7 +49,7 @@ namespace HotelApp.UI.Components
 
             // Setup container (this UserControl)
             this.AutoScaleMode = AutoScaleMode.None;
-            this.BackColor = HotelPalette.Surface;
+            this.BackColor = HotelApplication.Components.RoundedCorners.HotelPalette.Surface;
             this.Padding = new Padding(10, 7, 10, 7);
             this.Size = new Size(250, 30);
             this.Controls.Add(textBox1);
@@ -230,7 +230,7 @@ namespace HotelApp.UI.Components
                 {
                     using (GraphicsPath pathSurface = GetRoundedPath(rectSurface, borderRadius))
                     using (GraphicsPath pathBorder = GetRoundedPath(rectBorder, borderRadius - borderSize))
-                    using (Pen penSurface = new Pen(this.Parent != null ? this.Parent.BackColor : HotelPalette.MainBackground, smoothSize))
+                    using (Pen penSurface = new Pen(this.Parent != null ? this.Parent.BackColor : HotelApplication.Components.RoundedCorners.HotelPalette.MainBackground, smoothSize))
                     using (Pen penBorder = new Pen(currentBorderColor, borderSize))
                     {
                         // 1. Set Region
@@ -303,3 +303,5 @@ namespace HotelApp.UI.Components
         }
     }
 }
+
+

@@ -1,139 +1,253 @@
-﻿
-using System.ComponentModel;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
-using static HotelApplication.Components.RoundedCorners;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HotelApplication.Components
 {
+    [DesignerCategory("Code")]
+    [ToolboxBitmap(typeof(Button))]
+    [DefaultEvent("Click")]
     public class RoundedButton : Button
     {
-  
-        private int _borderRadius = 20;
-        private int _borderSize = 0;
-        private Color _borderColor = HotelPalette.Border;
+        private int borderSize = 0;
+        private int borderRadius = 20;
+        private Color borderColor = Color.FromArgb(60, 60, 60);
+        private Color backgroundColor = Color.FromArgb(64, 64, 64);
+        private Color textColor = Color.White;
+        private bool isHovered = false;
+        private bool isPressed = false;
 
-    
-        [Category("Appearance")]
-        public int BorderRadius
-        {
-            get { return _borderRadius; }
-            set { _borderRadius = value; this.Invalidate(); }
-        }
+        private const int DEFAULT_WIDTH = 150;
+        private const int DEFAULT_HEIGHT = 40;
+        private const int MIN_RADIUS = 0;
+        private const int MAX_RADIUS = 100;
 
         [Category("Appearance")]
+        [Description("The size of the button's border")]
+        [DefaultValue(0)]
         public int BorderSize
         {
-            get { return _borderSize; }
-            set { _borderSize = value; this.Invalidate(); }
+            get => borderSize;
+            set
+            {
+                if (borderSize != value)
+                {
+                    borderSize = Math.Max(0, value);
+                    Invalidate();
+                }
+            }
         }
 
         [Category("Appearance")]
+        [Description("The radius of the button's rounded corners")]
+        [DefaultValue(20)]
+        public int BorderRadius
+        {
+            get => borderRadius;
+            set
+            {
+                if (borderRadius != value)
+                {
+                    borderRadius = Math.Max(MIN_RADIUS, Math.Min(MAX_RADIUS, value));
+                    Invalidate();
+                }
+            }
+        }
+
+        [Category("Appearance")]
+        [Description("The color of the button's border")]
+        [DefaultValue(typeof(Color), "60, 60, 60")]
         public Color BorderColor
         {
-            get { return _borderColor; }
-            set { _borderColor = value; this.Invalidate(); }
+            get => borderColor;
+            set
+            {
+                if (borderColor != value)
+                {
+                    borderColor = value;
+                    Invalidate();
+                }
+            }
         }
 
         [Category("Appearance")]
+        [Description("The background color of the button")]
+        [DefaultValue(typeof(Color), "64, 64, 64")]
         public Color BackgroundColor
         {
-            get { return this.BackColor; }
-            set { this.BackColor = value; }
+            get => backgroundColor;
+            set
+            {
+                if (backgroundColor != value)
+                {
+                    backgroundColor = value;
+                    Invalidate();
+                }
+            }
         }
 
         [Category("Appearance")]
+        [Description("The color of the button's text")]
+        [DefaultValue(typeof(Color), "White")]
         public Color TextColor
         {
-            get { return this.ForeColor; }
-            set { this.ForeColor = value; }
+            get => textColor;
+            set
+            {
+                if (textColor != value)
+                {
+                    textColor = value;
+                    Invalidate();
+                }
+            }
         }
 
-     
+        public override Color BackColor
+        {
+            get => backgroundColor;
+            set => BackgroundColor = value;
+        }
+
+        public override Color ForeColor
+        {
+            get => textColor;
+            set => TextColor = value;
+        }
+
+        [Category("Appearance")]
+        [Description("The background color when the mouse hovers over the button")]
+        [DefaultValue(typeof(Color), "80, 80, 80")]
+        public Color HoverColor { get; set; } = Color.FromArgb(80, 80, 80);
+
+        [Category("Appearance")]
+        [Description("The background color when the button is pressed")]
+        [DefaultValue(typeof(Color), "100, 100, 100")]
+        public Color PressColor { get; set; } = Color.FromArgb(100, 100, 100);
+
         public RoundedButton()
         {
-            this.FlatStyle = FlatStyle.Flat;
-            this.FlatAppearance.BorderSize = 0;
-            this.Size = new Size(150, 40);
-            this.BackColor = HotelPalette.Accent;
-            this.ForeColor = Color.White;
-            this.Resize += new EventHandler(Button_Resize);
+            SetStyle(ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.SupportsTransparentBackColor |
+                     ControlStyles.UserPaint, true);
+
+            FlatStyle = FlatStyle.Flat;
+            FlatAppearance.BorderSize = 0;
+            Size = new Size(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            base.BackColor = backgroundColor;
+            base.ForeColor = textColor;
+
+            MouseEnter += (s, e) => { isHovered = true; Invalidate(); };
+            MouseLeave += (s, e) => { isHovered = false; Invalidate(); };
+            MouseDown += (s, e) => { isPressed = true; Invalidate(); };
+            MouseUp += (s, e) => { isPressed = false; Invalidate(); };
         }
 
-        
-        private void Button_Resize(object sender, EventArgs e)
-        {
-            if (_borderRadius > this.Height)
-                _borderRadius = this.Height;
-        }
-
-        // Methods
-        private GraphicsPath GetRoundedPath(RectangleF rect, float radius)
+        private GraphicsPath GetRoundedRectanglePath(RectangleF rect, float radius)
         {
             GraphicsPath path = new GraphicsPath();
-            path.StartFigure();
-            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
-            path.AddArc(rect.Width - radius, rect.Y, radius, radius, 270, 90);
-            path.AddArc(rect.Width - radius, rect.Height - radius, radius, radius, 0, 90);
-            path.AddArc(rect.X, rect.Height - radius, radius, radius, 90, 90);
+
+            if (radius <= 0)
+            {
+                path.AddRectangle(rect);
+                return path;
+            }
+
+            float diameter = radius * 2;
+            SizeF size = new SizeF(diameter, diameter);
+            RectangleF arc = new RectangleF(rect.Location, size);
+
+            path.AddArc(arc, 180, 90);
+
+            arc.X = rect.Right - diameter;
+            path.AddArc(arc, 270, 90);
+
+            arc.Y = rect.Bottom - diameter;
+            path.AddArc(arc, 0, 90);
+
+            arc.X = rect.Left;
+            path.AddArc(arc, 90, 90);
+
             path.CloseFigure();
             return path;
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(pevent);
-            pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            RectangleF rectSurface = new RectangleF(0, 0, this.Width, this.Height);
-            RectangleF rectBorder = new RectangleF(1, 1, this.Width - 2, this.Height - 2);
+            Color currentBgColor = backgroundColor;
+            if (isPressed && Enabled)
+                currentBgColor = PressColor;
+            else if (isHovered && Enabled)
+                currentBgColor = HoverColor;
 
-            if (_borderRadius > 2)
+            RectangleF rect = new RectangleF(0, 0, Width, Height);
+            RectangleF borderRect = RectangleF.Inflate(rect, -borderSize, -borderSize);
+
+            using (GraphicsPath path = GetRoundedRectanglePath(rect, borderRadius))
+            using (GraphicsPath borderPath = GetRoundedRectanglePath(borderRect, Math.Max(0, borderRadius - borderSize)))
             {
-                using (GraphicsPath pathSurface = GetRoundedPath(rectSurface, _borderRadius))
-                using (GraphicsPath pathBorder = GetRoundedPath(rectBorder, _borderRadius - 1))
-                using (Pen penSurface = new Pen(this.Parent.BackColor, 2))
-                using (Pen penBorder = new Pen(_borderColor, _borderSize))
+                if (borderRadius > 0)
+                    Region = new Region(path);
+
+                using (Brush bgBrush = new SolidBrush(currentBgColor))
                 {
-                    penBorder.Alignment = PenAlignment.Inset;
-
-                    // 1. Button Surface (This clips the button to the round shape)
-                    this.Region = new Region(pathSurface);
-
-                    // 2. Draw Surface border (Fixes aliased/jagged edges by blending with parent)
-                    pevent.Graphics.DrawPath(penSurface, pathSurface);
-
-                    // 3. Button Border (Optional colored border)
-                    if (_borderSize >= 1)
-                        pevent.Graphics.DrawPath(penBorder, pathBorder);
+                    e.Graphics.FillPath(bgBrush, path);
                 }
-            }
-            else
-            {
-                this.Region = new Region(rectSurface);
-                if (_borderSize >= 1)
+
+                if (borderSize > 0 && borderColor != Color.Transparent)
                 {
-                    using (Pen penBorder = new Pen(_borderColor, _borderSize))
+                    using (Pen borderPen = new Pen(borderColor, borderSize))
                     {
-                        penBorder.Alignment = PenAlignment.Inset;
-                        pevent.Graphics.DrawRectangle(penBorder, 0, 0, this.Width - 1, this.Height - 1);
+                        e.Graphics.DrawPath(borderPen, borderPath);
                     }
                 }
+
+                if (!string.IsNullOrEmpty(Text))
+                {
+                    StringFormat sf = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Center
+                    };
+
+                    using (Brush textBrush = new SolidBrush(Enabled ? textColor : Color.Gray))
+                    {
+                        e.Graphics.DrawString(Text, Font, textBrush, rect, sf);
+                    }
+                }
+
+                if (Focused && ShowFocusCues)
+                {
+                    Rectangle focusRect = Rectangle.Inflate(ClientRectangle, -4, -4);
+                    ControlPaint.DrawFocusRectangle(e.Graphics, focusRect);
+                }
             }
         }
 
-        // Handle parent background color changes
-        protected override void OnHandleCreated(EventArgs e)
+        protected override void OnParentBackColorChanged(EventArgs e)
         {
-            base.OnHandleCreated(e);
-            if (this.Parent != null)
+            base.OnParentBackColorChanged(e);
+            Invalidate();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+            Invalidate();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
             }
-        }
-
-        private void Container_BackColorChanged(object sender, EventArgs e)
-        {
-            this.Invalidate();
+            base.Dispose(disposing);
         }
     }
 }

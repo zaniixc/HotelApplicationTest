@@ -1,5 +1,4 @@
-﻿using HotelApplication.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HotelApplication.Forms.Auth
+namespace HotelApplication.Forms.Dashboard
 {
-    public partial class ProgressBar : RoundedCorners
+    public partial class Dashboard : UserControl
     {
-        public ProgressBar()
+        public Dashboard()
         {
             InitializeComponent();
-            this.MaximumSize = this.Size;
-            this.FormBorderStyle = FormBorderStyle.None;
         }
     }
 }

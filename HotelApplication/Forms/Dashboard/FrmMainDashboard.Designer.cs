@@ -18,7 +18,6 @@ namespace HotelApplication.Forms.Dashboard
         private HotelApplication.Components.RoundedButton btnUsers;
         private HotelApplication.Components.RoundedButton btnSettings;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.PictureBox bellIcon;
         private System.Windows.Forms.Panel cardPanel;
         private System.Windows.Forms.Panel cardSales;
         private System.Windows.Forms.Panel cardUsers;
@@ -58,7 +57,6 @@ namespace HotelApplication.Forms.Dashboard
             lblTitle = new Label();
             topPanel = new Panel();
             txtSearch = new UITextBox();
-            bellIcon = new PictureBox();
             contentPanel = new Panel();
             cardPanel = new Panel();
             cardSales = new Panel();
@@ -69,7 +67,6 @@ namespace HotelApplication.Forms.Dashboard
             lblNewUsersValue = new Label();
             leftPanel.SuspendLayout();
             topPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bellIcon).BeginInit();
             contentPanel.SuspendLayout();
             cardPanel.SuspendLayout();
             cardSales.SuspendLayout();
@@ -78,23 +75,26 @@ namespace HotelApplication.Forms.Dashboard
             // 
             // pnlTest
             // 
+            pnlTest.BackColor = Color.FromArgb(32, 32, 32);
             pnlTest.Dock = DockStyle.Fill;
+            pnlTest.Location = new Point(18, 18);
             pnlTest.Name = "pnlTest";
+            pnlTest.Size = new Size(1095, 616);
             pnlTest.TabIndex = 1;
             // 
             // leftPanel
             // 
-            leftPanel.BackColor = Color.FromArgb(32, 32, 32);
+            leftPanel.BackColor = Color.FromArgb(20, 20, 20);
             leftPanel.Controls.Add(btnLogout);
             leftPanel.Controls.Add(btnSettings);
             leftPanel.Controls.Add(btnUsers);
             leftPanel.Controls.Add(btnDashboard);
             leftPanel.Controls.Add(lblTitle);
             leftPanel.Dock = DockStyle.Left;
-            leftPanel.Location = new Point(0, 0);
+            leftPanel.Location = new Point(2, 2);
             leftPanel.Name = "leftPanel";
             leftPanel.Padding = new Padding(12);
-            leftPanel.Size = new Size(160, 650);
+            leftPanel.Size = new Size(145, 716);
             leftPanel.TabIndex = 2;
             // 
             // btnLogout
@@ -131,6 +131,7 @@ namespace HotelApplication.Forms.Dashboard
             btnSettings.Text = "Settings";
             btnSettings.TextColor = Color.White;
             btnSettings.UseVisualStyleBackColor = false;
+            btnSettings.Click += btnSettings_Click;
             // 
             // btnUsers
             // 
@@ -166,6 +167,7 @@ namespace HotelApplication.Forms.Dashboard
             btnDashboard.Text = "Dashboard";
             btnDashboard.TextColor = Color.White;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // lblTitle
             // 
@@ -180,14 +182,13 @@ namespace HotelApplication.Forms.Dashboard
             // 
             // topPanel
             // 
-            topPanel.BackColor = Color.FromArgb(18, 18, 18);
+            topPanel.BackColor = Color.FromArgb(20, 20, 20);
             topPanel.Controls.Add(txtSearch);
-            topPanel.Controls.Add(bellIcon);
             topPanel.Dock = DockStyle.Top;
-            topPanel.Location = new Point(160, 0);
+            topPanel.Location = new Point(147, 2);
             topPanel.Name = "topPanel";
             topPanel.Padding = new Padding(12);
-            topPanel.Size = new Size(840, 64);
+            topPanel.Size = new Size(1131, 64);
             topPanel.TabIndex = 1;
             // 
             // txtSearch
@@ -196,7 +197,7 @@ namespace HotelApplication.Forms.Dashboard
             txtSearch.BorderColor = Color.FromArgb(60, 60, 60);
             txtSearch.BorderFocusColor = Color.FromArgb(100, 149, 237);
             txtSearch.BorderRadius = 10;
-            txtSearch.Location = new Point(180, 14);
+            txtSearch.Location = new Point(30, 14);
             txtSearch.Multiline = false;
             txtSearch.Name = "txtSearch";
             txtSearch.Padding = new Padding(10, 7, 10, 7);
@@ -206,25 +207,16 @@ namespace HotelApplication.Forms.Dashboard
             txtSearch.TabIndex = 0;
             txtSearch.UnderlinedStyle = false;
             // 
-            // bellIcon
-            // 
-            bellIcon.BackColor = Color.Transparent;
-            bellIcon.Location = new Point(930, 16);
-            bellIcon.Name = "bellIcon";
-            bellIcon.Size = new Size(24, 24);
-            bellIcon.SizeMode = PictureBoxSizeMode.CenterImage;
-            bellIcon.TabIndex = 1;
-            bellIcon.TabStop = false;
-            // 
             // contentPanel
             // 
             contentPanel.BackColor = Color.FromArgb(20, 20, 20);
             contentPanel.Controls.Add(cardPanel);
+            contentPanel.Controls.Add(pnlTest);
             contentPanel.Dock = DockStyle.Fill;
-            contentPanel.Location = new Point(160, 64);
+            contentPanel.Location = new Point(147, 66);
             contentPanel.Name = "contentPanel";
             contentPanel.Padding = new Padding(18);
-            contentPanel.Size = new Size(840, 586);
+            contentPanel.Size = new Size(1131, 652);
             contentPanel.TabIndex = 0;
             // 
             // cardPanel
@@ -236,12 +228,12 @@ namespace HotelApplication.Forms.Dashboard
             cardPanel.Location = new Point(18, 18);
             cardPanel.Name = "cardPanel";
             cardPanel.Padding = new Padding(6);
-            cardPanel.Size = new Size(804, 120);
+            cardPanel.Size = new Size(1095, 120);
             cardPanel.TabIndex = 1;
             // 
             // cardSales
             // 
-            cardSales.BackColor = Color.FromArgb(24, 24, 24);
+            cardSales.BackColor = Color.FromArgb(32, 32, 32);
             cardSales.BorderStyle = BorderStyle.FixedSingle;
             cardSales.Controls.Add(lblTotalSalesTitle);
             cardSales.Controls.Add(lblTotalSalesValue);
@@ -271,7 +263,7 @@ namespace HotelApplication.Forms.Dashboard
             // 
             // cardUsers
             // 
-            cardUsers.BackColor = Color.FromArgb(24, 24, 24);
+            cardUsers.BackColor = Color.FromArgb(32, 32, 32);
             cardUsers.BorderStyle = BorderStyle.FixedSingle;
             cardUsers.Controls.Add(lblNewUsersTitle);
             cardUsers.Controls.Add(lblNewUsersValue);
@@ -303,9 +295,7 @@ namespace HotelApplication.Forms.Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1000, 650);
-            // ensure the test/content host panel is placed inside the main content area
-            contentPanel.Controls.Add(pnlTest);
+            ClientSize = new Size(1280, 720);
             Controls.Add(contentPanel);
             Controls.Add(topPanel);
             Controls.Add(leftPanel);
@@ -314,7 +304,6 @@ namespace HotelApplication.Forms.Dashboard
             leftPanel.ResumeLayout(false);
             leftPanel.PerformLayout();
             topPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)bellIcon).EndInit();
             contentPanel.ResumeLayout(false);
             cardPanel.ResumeLayout(false);
             cardSales.ResumeLayout(false);
