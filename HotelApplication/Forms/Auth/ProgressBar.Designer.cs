@@ -64,6 +64,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
+            BorderColor = Color.Black;
+            BorderSize = 1;
             ClientSize = new Size(655, 260);
             Controls.Add(label3);
             Controls.Add(uiProgressBar1);

@@ -1,13 +1,5 @@
 ﻿using HotelApplication.Components;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+// using HotelApplication.Forms.Auth;
 
 namespace HotelApplication.Forms.Auth
 {
@@ -33,9 +25,9 @@ namespace HotelApplication.Forms.Auth
         }
         private void returnToLogInLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            LoginFrm loginFrm = new LoginFrm();
-            loginFrm.Show();
+            //this.Hide();
+            //LoginFrm loginFrm = new LoginFrm();
+            //loginFrm.Show();
         }
     }
 }

@@ -1,5 +1,5 @@
 using HotelApplication.Components;
-using HotelApplication.Forms.Auth;
+// using HotelApplication.Forms.Auth;
 
 namespace HotelApplication
 {
@@ -25,9 +25,9 @@ namespace HotelApplication
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            RegisterFrm registerFrm = new RegisterFrm();
-            registerFrm.Show();
+            //this.Hide();
+            //RegisterFrm registerFrm = new RegisterFrm();
+            //registerFrm.Show();
         }
         private void label2_Click(object sender, EventArgs e)
         {

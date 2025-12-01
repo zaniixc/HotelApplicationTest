@@ -100,72 +100,60 @@ namespace HotelApplication.Forms.Dashboard
             // btnLogout
             // 
             btnLogout.BackColor = Color.FromArgb(64, 64, 64);
-            btnLogout.BackgroundColor = Color.FromArgb(64, 64, 64);
-            btnLogout.BorderColor = Color.FromArgb(60, 60, 60);
             btnLogout.BorderRadius = 8;
-            btnLogout.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.ForeColor = Color.White;
             btnLogout.Location = new Point(12, 520);
             btnLogout.Name = "btnLogout";
+            btnLogout.PressColor = Color.FromArgb(100, 100, 100);
             btnLogout.Size = new Size(120, 36);
             btnLogout.TabIndex = 0;
             btnLogout.Text = "Logout";
-            btnLogout.TextColor = Color.White;
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
             // btnSettings
             // 
             btnSettings.BackColor = Color.FromArgb(64, 64, 64);
-            btnSettings.BackgroundColor = Color.FromArgb(64, 64, 64);
-            btnSettings.BorderColor = Color.FromArgb(60, 60, 60);
             btnSettings.BorderRadius = 8;
-            btnSettings.BorderSize = 0;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.ForeColor = Color.White;
             btnSettings.Location = new Point(12, 140);
             btnSettings.Name = "btnSettings";
+            btnSettings.PressColor = Color.FromArgb(100, 100, 100);
             btnSettings.Size = new Size(120, 36);
             btnSettings.TabIndex = 1;
             btnSettings.Text = "Settings";
-            btnSettings.TextColor = Color.White;
             btnSettings.UseVisualStyleBackColor = false;
             btnSettings.Click += btnSettings_Click;
             // 
             // btnUsers
             // 
             btnUsers.BackColor = Color.FromArgb(64, 64, 64);
-            btnUsers.BackgroundColor = Color.FromArgb(64, 64, 64);
-            btnUsers.BorderColor = Color.FromArgb(60, 60, 60);
             btnUsers.BorderRadius = 8;
-            btnUsers.BorderSize = 0;
             btnUsers.FlatStyle = FlatStyle.Flat;
             btnUsers.ForeColor = Color.White;
             btnUsers.Location = new Point(12, 98);
             btnUsers.Name = "btnUsers";
+            btnUsers.PressColor = Color.FromArgb(100, 100, 100);
             btnUsers.Size = new Size(120, 36);
             btnUsers.TabIndex = 2;
             btnUsers.Text = "Users";
-            btnUsers.TextColor = Color.White;
             btnUsers.UseVisualStyleBackColor = false;
             btnUsers.Click += btnUsers_Click;
             // 
             // btnDashboard
             // 
             btnDashboard.BackColor = Color.FromArgb(64, 64, 64);
-            btnDashboard.BackgroundColor = Color.FromArgb(64, 64, 64);
-            btnDashboard.BorderColor = Color.FromArgb(60, 60, 60);
             btnDashboard.BorderRadius = 8;
-            btnDashboard.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.ForeColor = Color.White;
             btnDashboard.Location = new Point(12, 56);
             btnDashboard.Name = "btnDashboard";
+            btnDashboard.PressColor = Color.FromArgb(100, 100, 100);
             btnDashboard.Size = new Size(120, 36);
             btnDashboard.TabIndex = 3;
             btnDashboard.Text = "Dashboard";
-            btnDashboard.TextColor = Color.White;
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
             // 
@@ -295,6 +283,8 @@ namespace HotelApplication.Forms.Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BorderColor = Color.Black;
+            BorderSize = 1;
             ClientSize = new Size(1280, 720);
             Controls.Add(contentPanel);
             Controls.Add(topPanel);

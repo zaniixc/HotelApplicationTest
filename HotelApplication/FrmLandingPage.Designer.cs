@@ -164,7 +164,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
-            BorderSize = 0;
+            BorderColor = Color.Black;
+            BorderSize = 1;
             ClientSize = new Size(649, 419);
             Controls.Add(txt_Password);
             Controls.Add(btnDashboard);
