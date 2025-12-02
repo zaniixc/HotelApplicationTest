@@ -11,19 +11,19 @@ namespace HotelApplication.Components
 
         public static class HotelPalette
         {
-            public static readonly Color MainBackground = Color.FromArgb(20, 20, 20);
-            public static readonly Color Surface = Color.FromArgb(32, 32, 32);
-            public static readonly Color Border = Color.FromArgb(60, 60, 60);
-            public static readonly Color Accent = Color.FromArgb(100, 149, 237);
+            public static readonly Color MainBackground = Color.FromArgb(20, 20, 20);  
+            public static readonly Color Surface = Color.FromArgb(32, 32, 32);    
+            public static readonly Color Border = Color.FromArgb(60, 60, 60);      
+            public static readonly Color Accent = Color.FromArgb(100, 149, 237);  
             public static readonly Color TextPrimary = Color.FromArgb(230, 230, 230);
-            public static readonly Color TextSecondary = Color.FromArgb(160, 160, 160);
+            public static readonly Color TextSecondary = Color.FromArgb(160, 160, 160);   
         }
 
         private int _borderRadius = 30;
         private int _borderSize = 2;
         private Color _borderColor = Color.FromArgb(128, 128, 255);
 
-
+      
         [Category("Appearance")]
         public int BorderRadius
         {
@@ -45,11 +45,11 @@ namespace HotelApplication.Components
             set { _borderColor = value; this.Invalidate(); }
         }
 
-
+   
         public RoundedCorners()
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Padding = new Padding(_borderSize);
+            this.Padding = new Padding(_borderSize); 
         }
 
         protected override void WndProc(ref Message m)
@@ -60,21 +60,21 @@ namespace HotelApplication.Components
 
             base.WndProc(ref m);
 
-
+         
             if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)
             {
                 m.Result = (IntPtr)HTCAPTION;
             }
         }
 
-
+      
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             RectangleF rectSurface = new RectangleF(0, 0, this.Width, this.Height);
-
+           
             RectangleF rectBorder = new RectangleF(1, 1, this.Width - 2, this.Height - 2);
 
             if (_borderRadius > 2)
@@ -88,10 +88,10 @@ namespace HotelApplication.Components
 
                     this.Region = new Region(pathSurface);
 
-
+                
                     e.Graphics.DrawPath(penSurface, pathSurface);
 
-
+                  
                     if (_borderSize >= 1)
                     {
                         e.Graphics.DrawPath(penBorder, pathBorder);
@@ -100,7 +100,7 @@ namespace HotelApplication.Components
             }
             else
             {
-
+             
                 this.Region = new Region(rectSurface);
                 if (_borderSize >= 1)
                 {
@@ -126,10 +126,6 @@ namespace HotelApplication.Components
             return path;
         }
 
-        private void InitializeComponent()
-        {
-
-        }
 
         protected override void OnResize(EventArgs e)
         {
