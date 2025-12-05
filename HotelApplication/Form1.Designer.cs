@@ -84,19 +84,18 @@
             // userTextBox
             // 
             userTextBox.BackColor = Color.White;
-            userTextBox.BackgroundImageLayout = ImageLayout.None;
             userTextBox.BorderColor = Color.FromArgb(60, 60, 60);
             userTextBox.BorderFocusColor = Color.FromArgb(100, 149, 237);
             userTextBox.BorderRadius = 5;
             userTextBox.Font = new Font("Segoe UI", 12F);
             userTextBox.ForeColor = Color.Black;
-            userTextBox.Location = new Point(117, 100);
+            userTextBox.Location = new Point(117, 90);
             userTextBox.Margin = new Padding(3, 4, 3, 4);
             userTextBox.Multiline = false;
             userTextBox.Name = "userTextBox";
             userTextBox.Padding = new Padding(11, 9, 11, 9);
             userTextBox.PasswordChar = false;
-            userTextBox.PlaceholderText = "";
+            userTextBox.PlaceholderText = "Username";
             userTextBox.Size = new Size(419, 47);
             userTextBox.TabIndex = 3;
             userTextBox.UnderlinedStyle = false;
@@ -107,7 +106,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(283, 55);
+            label1.Location = new Point(269, 55);
             label1.Name = "label1";
             label1.Size = new Size(99, 28);
             label1.TabIndex = 4;
@@ -119,29 +118,27 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 12F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(283, 152);
+            label2.Location = new Point(274, 152);
             label2.Name = "label2";
             label2.Size = new Size(93, 28);
             label2.TabIndex = 5;
             label2.Text = "Password";
-            label2.Click += label2_Click;
             // 
             // passTxtBox
             // 
             passTxtBox.BackColor = Color.White;
-            passTxtBox.BackgroundImageLayout = ImageLayout.None;
             passTxtBox.BorderColor = Color.FromArgb(60, 60, 60);
             passTxtBox.BorderFocusColor = Color.FromArgb(100, 149, 237);
             passTxtBox.BorderRadius = 5;
             passTxtBox.Font = new Font("Segoe UI", 12F);
             passTxtBox.ForeColor = Color.Black;
-            passTxtBox.Location = new Point(117, 184);
+            passTxtBox.Location = new Point(117, 187);
             passTxtBox.Margin = new Padding(3, 4, 3, 4);
             passTxtBox.Multiline = false;
             passTxtBox.Name = "passTxtBox";
             passTxtBox.Padding = new Padding(11, 9, 11, 9);
             passTxtBox.PasswordChar = true;
-            passTxtBox.PlaceholderText = "";
+            passTxtBox.PlaceholderText = "Password";
             passTxtBox.Size = new Size(419, 47);
             passTxtBox.TabIndex = 6;
             passTxtBox.UnderlinedStyle = false;
@@ -151,7 +148,7 @@
             signUpLbl.AutoSize = true;
             signUpLbl.Font = new Font("Segoe UI", 11F);
             signUpLbl.LinkColor = Color.RoyalBlue;
-            signUpLbl.Location = new Point(82, 373);
+            signUpLbl.Location = new Point(82, 370);
             signUpLbl.Name = "signUpLbl";
             signUpLbl.Size = new Size(321, 25);
             signUpLbl.TabIndex = 7;
@@ -161,15 +158,15 @@
             // 
             // forgotBtn
             // 
-            forgotBtn.BackColor = Color.FromArgb(80, 80, 80);
-            forgotBtn.BackgroundColor = Color.FromArgb(80, 80, 80);
+            forgotBtn.BackColor = Color.RoyalBlue;
+            forgotBtn.BackgroundColor = Color.RoyalBlue;
             forgotBtn.BorderColor = Color.FromArgb(60, 60, 60);
-            forgotBtn.BorderRadius = 17;
+            forgotBtn.BorderRadius = 15;
             forgotBtn.BorderSize = 0;
             forgotBtn.FlatAppearance.BorderSize = 0;
             forgotBtn.FlatStyle = FlatStyle.Flat;
             forgotBtn.ForeColor = Color.White;
-            forgotBtn.Location = new Point(409, 373);
+            forgotBtn.Location = new Point(409, 370);
             forgotBtn.Margin = new Padding(3, 4, 3, 4);
             forgotBtn.Name = "forgotBtn";
             forgotBtn.Size = new Size(171, 29);
@@ -181,15 +178,15 @@
             // 
             // loginBtn
             // 
-            loginBtn.BackColor = Color.FromArgb(80, 80, 80);
-            loginBtn.BackgroundColor = Color.FromArgb(80, 80, 80);
+            loginBtn.BackColor = Color.RoyalBlue;
+            loginBtn.BackgroundColor = Color.RoyalBlue;
             loginBtn.BorderColor = Color.FromArgb(60, 60, 60);
-            loginBtn.BorderRadius = 20;
+            loginBtn.BorderRadius = 15;
             loginBtn.BorderSize = 0;
             loginBtn.FlatAppearance.BorderSize = 0;
             loginBtn.FlatStyle = FlatStyle.Flat;
             loginBtn.ForeColor = Color.White;
-            loginBtn.Location = new Point(232, 253);
+            loginBtn.Location = new Point(232, 251);
             loginBtn.Margin = new Padding(3, 4, 3, 4);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(171, 53);
@@ -197,7 +194,7 @@
             loginBtn.Text = "Login";
             loginBtn.TextColor = Color.White;
             loginBtn.UseVisualStyleBackColor = false;
-            loginBtn.Click += forgotBtn_Click;
+            loginBtn.Click += loginBtn_Click;
             // 
             // LoginFrm
             // 

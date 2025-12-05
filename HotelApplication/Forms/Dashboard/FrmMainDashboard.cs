@@ -155,13 +155,9 @@ namespace HotelApplication.Forms.Dashboard
             this.contentPanel.Controls.Add(view);
         }
 
-        // --- EVENTS LINKED TO DESIGNER ---
-        // Ensure the button in Designer has Click event set to 'btnLogout_Click'
         private void btnLogout_Click(object sender, EventArgs e)
         {
             SessionManager.Logout();
-            LoginFrm login = new LoginFrm();
-            login.Show();
             this.Close();
         }
     }

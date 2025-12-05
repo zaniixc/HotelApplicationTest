@@ -1,13 +1,9 @@
-﻿using HotelApp.UI.Helpers;
-using HotelApplication.Components;
-using HotelApplication.Forms.Dashboard;
-using HotelApplication.Helpers;
+﻿using HotelApplication.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +23,42 @@ namespace HotelApplication.Forms.Auth
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void closeBtn_Click(object sender, EventArgs e)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            string user = txtRegUser.Text.Trim();
+            string pass = txtRegPass.Text.Trim();
+            string confirm = txtRegConfirm.Text.Trim();
+
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            {
+                MessageBox.Show("Please fill all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (pass != confirm)
+            {
+                MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // For Adding an actual database saving logic not using a database for now
+            MessageBox.Show("Account Created Successfully!", "Success");
+
+            LoginFrm login = new LoginFrm();
+            login.Show();
+            this.Close();
+        }
+
+        private void linkBackToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoginFrm login = new LoginFrm();
+            login.Show();
+            this.Close();
         }
     }
 }
