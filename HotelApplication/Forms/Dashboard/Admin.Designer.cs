@@ -34,7 +34,6 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(20, 20, 20);
             Name = "Admin";
             Size = new Size(800, 600);
             ResumeLayout(false);

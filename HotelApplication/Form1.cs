@@ -9,8 +9,6 @@ namespace HotelApplication
 {
     public partial class LoginFrm : RoundedCorners
     {
-
-
         public LoginFrm()
         {
             InitializeComponent();

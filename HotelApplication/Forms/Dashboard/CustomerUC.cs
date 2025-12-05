@@ -125,13 +125,15 @@ namespace HotelApplication.Forms.Dashboard
             // --- 1. Header ---
             pnlHeader = new Panel { Height = 80, Dock = DockStyle.Top, BackColor = HotelPalette.MainBackground, Padding = new Padding(20) };
 
-            lblWelcome = new Label { Font = new Font("Segoe UI", 16, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, AutoSize = true, Location = new Point(20, 25) };
+            lblWelcome = new Label { Font = new Font("Segoe UI",16, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, AutoSize = true, Location = new Point(20, 25) };
 
             // Wallet Area
             Panel pnlWallet = new Panel { Size = new Size(350, 50), Dock = DockStyle.Right };
+            
             lblBalance = new Label { Font = new Font("Segoe UI", 14, FontStyle.Bold), ForeColor = Color.LightGreen, Location = new Point(0, 10), AutoSize = true, Text = "$0.00" };
 
             btnAddFunds = new RoundedButton { Text = "+ Deposit", Size = new Size(120, 35), Location = new Point(200, 5), BackColor = HotelPalette.Surface, BorderColor = Color.Green, BorderSize = 1 };
+            
             btnAddFunds.Click += BtnAddFunds_Click;
 
             pnlWallet.Controls.Add(lblBalance);
@@ -143,9 +145,11 @@ namespace HotelApplication.Forms.Dashboard
             pnlFilters = new Panel { Height = 60, Dock = DockStyle.Top, Visible = false, Padding = new Padding(20, 10, 20, 0) };
 
             txtSearch = new UITextBox { PlaceholderText = "Search...", Size = new Size(250, 40), Location = new Point(20, 10), BorderRadius = 15, ForeColor = HotelPalette.TextPrimary };
+            
             txtSearch._TextChanged += (s, e) => ApplyFilters();
 
-            cmbSort = new ComboBox { Location = new Point(290, 18), Size = new Size(150, 30), DropDownStyle = ComboBoxStyle.DropDownList, FlatStyle = FlatStyle.Flat, BackColor = HotelPalette.Surface, ForeColor = Color.White, Font = new Font("Segoe UI", 10) };
+            cmbSort = new ComboBox { Location = new Point(290, 18), Size = new Size(150, 30), DropDownStyle = ComboBoxStyle.DropDownList, FlatStyle = FlatStyle.Flat, BackColor = HotelPalette.Surface, ForeColor = HotelPalette.TextPrimary, Font = new Font("Segoe UI", 10) };
+            
             cmbSort.Items.AddRange(new object[] { "Sort by Price: Low to High", "Sort by Price: High to Low", "Sort by Rating" });
             cmbSort.SelectedIndex = 0;
             cmbSort.SelectedIndexChanged += (s, e) => ApplyFilters();
@@ -173,7 +177,7 @@ namespace HotelApplication.Forms.Dashboard
                 AutoSize = false,
                 Size = new Size(300, 50),
                 BackColor = HotelPalette.Accent,
-                ForeColor = Color.White,
+                ForeColor = HotelPalette.TextPrimary,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 Visible = false
@@ -404,12 +408,12 @@ namespace HotelApplication.Forms.Dashboard
                 if (img != null) modalPic.Image = img;
             }
 
-            Label title = new Label { Text = r.Name, Font = new Font("Segoe UI", 18, FontStyle.Bold), ForeColor = Color.White, Location = new Point(20, 205), AutoSize = true };
+            Label title = new Label { Text = r.Name, Font = new Font("Segoe UI", 18, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 205), AutoSize = true };
             Label price = new Label { Text = $"Price: ${r.Price}/night", Font = new Font("Segoe UI", 14), ForeColor = HotelPalette.Accent, Location = new Point(20, 245), AutoSize = true };
-            Label desc = new Label { Text = r.Description, Font = new Font("Segoe UI", 10), ForeColor = Color.White, Location = new Point(20, 280), Size = new Size(460, 60) };
+            Label desc = new Label { Text = r.Description, Font = new Font("Segoe UI", 10), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 280), Size = new Size(460, 60) };
 
             // Amenities List
-            Label lblAm = new Label { Text = "Amenities:", Font = new Font("Segoe UI", 11, FontStyle.Bold), ForeColor = Color.White, Location = new Point(20, 340), AutoSize = true };
+            Label lblAm = new Label { Text = "Amenities:", Font = new Font("Segoe UI", 11, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 340), AutoSize = true };
             FlowLayoutPanel amFlow = new FlowLayoutPanel { Location = new Point(20, 360), Size = new Size(460, 60) };
             foreach (var am in r.Amenities)
             {
@@ -450,9 +454,9 @@ namespace HotelApplication.Forms.Dashboard
                 if (img != null) modalPic.Image = img;
             }
 
-            Label title = new Label { Text = s.Name, Font = new Font("Segoe UI", 18, FontStyle.Bold), ForeColor = Color.White, Location = new Point(20, 165), AutoSize = true };
+            Label title = new Label { Text = s.Name, Font = new Font("Segoe UI", 18, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 165), AutoSize = true };
             Label price = new Label { Text = $"${s.Price}", Font = new Font("Segoe UI", 14), ForeColor = HotelPalette.Accent, Location = new Point(20, 205), AutoSize = true };
-            Label desc = new Label { Text = s.Description, Font = new Font("Segoe UI", 10), ForeColor = Color.White, Location = new Point(20, 240), Size = new Size(360, 80) };
+            Label desc = new Label { Text = s.Description, Font = new Font("Segoe UI", 10), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 240), Size = new Size(360, 80) };
 
             RoundedButton btnOrder = new RoundedButton { Text = "Place Order", BackColor = HotelPalette.Accent, Size = new Size(150, 40), Location = new Point(230, 320) };
             btnOrder.Click += (ev, arg) => { OrderService(s); HideModal(); };

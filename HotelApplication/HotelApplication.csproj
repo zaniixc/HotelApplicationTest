@@ -9,8 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\Admin\" />
-    <Folder Include="Forms\Staff\" />
+    <Compile Remove="Forms\Admin\**" />
+    <Compile Remove="Forms\Staff\**" />
+    <EmbeddedResource Remove="Forms\Admin\**" />
+    <EmbeddedResource Remove="Forms\Staff\**" />
+    <None Remove="Forms\Admin\**" />
+    <None Remove="Forms\Staff\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\**\*">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

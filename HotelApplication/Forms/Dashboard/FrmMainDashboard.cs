@@ -1,3 +1,7 @@
+using HotelApp.UI.Helpers;
+using HotelApplication.Components;
+using HotelApplication.Helpers;
+using HotelApplicationTest.Forms.Dashboard;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,35 +11,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HotelApp.UI.Helpers;
-using HotelApplication.Components;
-using HotelApplication.Helpers;
-using static HotelApplication.Components.RoundedCorners;
 
 namespace HotelApplication.Forms.Dashboard
 {
     public partial class FrmMainDashboard : RoundedCorners
-    { // Only declare NEW items here. 
-      // DO NOT declare 'leftPanel', 'contentPanel', 'btnLogout' etc. 
-      // They are already in the Designer file.
-
+    {
+        // Only declare NEW items here. 
+        // DO NOT declare 'leftPanel', 'contentPanel', 'btnLogout' etc. 
+        // They are already in the Designer file.
         private Panel pnlNavButtons; // We create this one dynamically
-        private Label lblLogo;       // We create this one dynamically
+        private Label lblLogo; // We create this one dynamically
         private CustomerUC activeCustomerPanel;
-        private Admin activeAdminPanel;
+        private Admin adminView;
+        private RoomSettings roomSettingsView;
+        private SystemLogs systemLogsView;
 
         public FrmMainDashboard()
         {
             InitializeComponent();
+            SetupDynamicUI();
 
-            // --- DEV MODE FIX ---
+            // DEV MODE: Auto-login if null (Optional)
             if (SessionManager.CurrentUser == null)
             {
-                var debugUser = MockDataManager.GetUser("customer2");
+                var debugUser = MockDataManager.GetUser("customer1");
                 SessionManager.Login(debugUser);
             }
-
-            SetupDynamicUI();
         }
 
         private void FrmMainDashboard_Load(object sender, EventArgs e)
@@ -43,20 +44,16 @@ namespace HotelApplication.Forms.Dashboard
             string role = SessionManager.CurrentUser?.Role ?? "Guest";
             SetupSidebarButtons(role);
 
+            // Load Default View based on Role
             if (role == "Customer")
             {
-                activeCustomerPanel = new CustomerUC();
-                activeAdminPanel = new Admin();
+                if (activeCustomerPanel == null) activeCustomerPanel = new CustomerUC();
                 ShowView(activeCustomerPanel);
             }
             else if (role == "Admin")
             {
-                activeAdminPanel = new Admin();
-                ShowView(activeAdminPanel);
-            }
-            else
-            {
-                MessageBox.Show("Welcome Staff");
+                if (adminView == null) adminView = new Admin();
+                ShowView(adminView);
             }
         }
 
@@ -70,14 +67,12 @@ namespace HotelApplication.Forms.Dashboard
             lblLogo.ForeColor = HotelPalette.Accent;
             lblLogo.Location = new Point(20, 20);
             lblLogo.AutoSize = true;
-
-            // We use 'this.leftPanel' which comes from the Designer
             this.leftPanel.Controls.Add(lblLogo);
 
             // 2. Nav Button Container
             pnlNavButtons = new Panel();
             pnlNavButtons.Location = new Point(0, 100);
-            pnlNavButtons.Size = new Size(160, 400);
+            pnlNavButtons.Size = new Size(183, 500);
             pnlNavButtons.BackColor = Color.Transparent;
             this.leftPanel.Controls.Add(pnlNavButtons);
             pnlNavButtons.BringToFront();
@@ -90,28 +85,32 @@ namespace HotelApplication.Forms.Dashboard
 
             if (role == "Customer")
             {
-                AddSidebarButton("Browse Rooms", (s, e) =>
-                {
-                    ShowView(activeCustomerPanel);
-                    activeCustomerPanel?.LoadAvailableRooms();
-                }, ref buttonY);
-                AddSidebarButton("Room Service", (s, e) =>
-                {
-                    ShowView(activeCustomerPanel);
-                    activeCustomerPanel?.LoadRoomServices();
-                }, ref buttonY);
-                AddSidebarButton("My History", (s, e) =>
-                {
-                    ShowView(activeCustomerPanel);
-                    activeCustomerPanel?.LoadHistory();
-                }, ref buttonY);
-                AddSidebarButton("Users", (s, e) => ShowView(activeAdminPanel), ref buttonY);
+                AddSidebarButton("Browse Rooms", (s, e) => activeCustomerPanel?.LoadAvailableRooms(), ref buttonY);
+                AddSidebarButton("Room Service", (s, e) => activeCustomerPanel?.LoadRoomServices(), ref buttonY);
+                AddSidebarButton("My History", (s, e) => activeCustomerPanel?.LoadHistory(), ref buttonY);
             }
             else if (role == "Admin")
             {
-                AddSidebarButton("User Management", (s, e) => ShowView(activeAdminPanel), ref buttonY);
-                AddSidebarButton("Room Settings", (s, e) => MessageBox.Show("Room Settings View"), ref buttonY);
-                AddSidebarButton("System Logs", (s, e) => MessageBox.Show("Logs View"), ref buttonY);
+                // 1. User Management
+                AddSidebarButton("Staff Directory", (s, e) =>
+                {
+                    if (adminView == null) adminView = new Admin();
+                    ShowView(adminView);
+                }, ref buttonY);
+
+                // 2. Room Settings
+                AddSidebarButton("Room Settings", (s, e) =>
+                {
+                    if (roomSettingsView == null) roomSettingsView = new RoomSettings();
+                    ShowView(roomSettingsView);
+                }, ref buttonY);
+
+                // 3. System Logs
+                AddSidebarButton("System Logs", (s, e) =>
+                {
+                    if (systemLogsView == null) systemLogsView = new SystemLogs();
+                    ShowView(systemLogsView);
+                }, ref buttonY);
             }
         }
 
@@ -121,22 +120,33 @@ namespace HotelApplication.Forms.Dashboard
             btn.Text = text;
             btn.BackColor = Color.FromArgb(64, 64, 64);
             btn.ForeColor = Color.White;
-            btn.Size = new Size(140, 40);
-            btn.Location = new Point(20, yPos);
-            btn.BorderRadius = 8;
+            btn.Size = new Size(160, 45);
+            btn.Location = new Point(12, yPos);
+            btn.BorderRadius = 10;
             btn.TextAlign = ContentAlignment.MiddleLeft;
-            btn.Padding = new Padding(10, 0, 0, 0);
+            btn.Padding = new Padding(15, 0, 0, 0);
+            btn.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            btn.Cursor = Cursors.Hand;
+
             btn.Click += (s, e) =>
             {
                 foreach (Control c in pnlNavButtons.Controls)
-                    if (c is RoundedButton b) b.BackColor = Color.FromArgb(64, 64, 64);
+                {
+                    if (c is RoundedButton b)
+                    {
+                        b.BackColor = Color.FromArgb(64, 64, 64);
+                        b.ForeColor = Color.White;
+                    }
+                }
 
                 ((RoundedButton)s).BackColor = HotelPalette.Accent;
+                ((RoundedButton)s).ForeColor = Color.White;
+
                 onClick?.Invoke(s, e);
             };
 
             pnlNavButtons.Controls.Add(btn);
-            yPos += 50;
+            yPos += 55;
         }
 
         private void ShowView(UserControl view)

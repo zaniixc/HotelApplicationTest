@@ -32,12 +32,10 @@
             // 
             // Settings
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(32, 32, 32);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Settings";
-            Size = new Size(1251, 821);
+            Size = new Size(800, 600);
             ResumeLayout(false);
         }
 
