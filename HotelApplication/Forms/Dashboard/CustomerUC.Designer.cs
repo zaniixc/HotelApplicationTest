@@ -1,6 +1,6 @@
 ﻿namespace HotelApplication.Forms.Dashboard
 {
-    partial class Admin
+    partial class CustomerUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,12 +30,12 @@
         {
             SuspendLayout();
             // 
-            // Admin
+            // CustomerUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "Admin";
-            Size = new Size(800, 600);
+            Name = "CustomerUC";
+            Size = new Size(461, 375);
             ResumeLayout(false);
         }
 

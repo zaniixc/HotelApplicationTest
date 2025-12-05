@@ -28,46 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            uiProgressBar1 = new HotelApp.UI.Components.UIProgressBar();
+            uiProgressBar = new HotelApp.UI.Components.UIProgressBar();
             statusLbl = new Label();
             SuspendLayout();
             // 
-            // uiProgressBar1
+            // uiProgressBar
             // 
-            uiProgressBar1.BackColor = Color.FromArgb(20, 20, 20);
-            uiProgressBar1.ChannelColor = Color.FromArgb(32, 32, 32);
-            uiProgressBar1.ForeColor = Color.FromArgb(230, 230, 230);
-            uiProgressBar1.Location = new Point(64, 81);
-            uiProgressBar1.Maximum = 100;
-            uiProgressBar1.Name = "uiProgressBar1";
-            uiProgressBar1.ShowValue = false;
-            uiProgressBar1.Size = new Size(436, 38);
-            uiProgressBar1.SliderColor = Color.FromArgb(100, 149, 237);
-            uiProgressBar1.TabIndex = 0;
-            uiProgressBar1.Text = "uiProgressBar1";
-            uiProgressBar1.Value = 0;
+            uiProgressBar.BackColor = Color.FromArgb(20, 20, 20);
+            uiProgressBar.ChannelColor = Color.FromArgb(32, 32, 32);
+            uiProgressBar.ForeColor = Color.FromArgb(230, 230, 230);
+            uiProgressBar.Location = new Point(97, 105);
+            uiProgressBar.Margin = new Padding(3, 4, 3, 4);
+            uiProgressBar.Maximum = 100;
+            uiProgressBar.Name = "uiProgressBar";
+            uiProgressBar.ShowValue = false;
+            uiProgressBar.Size = new Size(454, 36);
+            uiProgressBar.SliderColor = Color.FromArgb(100, 149, 237);
+            uiProgressBar.TabIndex = 0;
+            uiProgressBar.Text = "uiProgressBar1";
+            uiProgressBar.Value = 0;
             // 
             // statusLbl
             // 
             statusLbl.AutoSize = true;
             statusLbl.Font = new Font("Segoe UI", 16F);
             statusLbl.ForeColor = Color.White;
-            statusLbl.Location = new Point(252, 133);
+            statusLbl.Location = new Point(126, 150);
             statusLbl.Name = "statusLbl";
-            statusLbl.Size = new Size(70, 30);
+            statusLbl.Size = new Size(88, 37);
             statusLbl.TabIndex = 1;
             statusLbl.Text = "Status";
             // 
             // ProgressBar
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
-            ClientSize = new Size(586, 195);
+            ClientSize = new Size(654, 260);
             Controls.Add(statusLbl);
-            Controls.Add(uiProgressBar1);
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(uiProgressBar);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ProgressBar";
+            Padding = new Padding(2, 3, 2, 3);
             Text = "ProgressBar";
             ResumeLayout(false);
             PerformLayout();
@@ -75,7 +77,7 @@
 
         #endregion
 
-        private HotelApp.UI.Components.UIProgressBar uiProgressBar1;
+        private HotelApp.UI.Components.UIProgressBar uiProgressBar;
         private Label statusLbl;
     }
 }
