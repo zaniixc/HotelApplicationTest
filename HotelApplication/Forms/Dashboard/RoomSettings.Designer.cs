@@ -1,4 +1,4 @@
-﻿namespace HotelApplicationTest.Forms.Dashboard
+﻿namespace HotelApplication.Forms.Dashboard
 {
     partial class RoomSettings
     {

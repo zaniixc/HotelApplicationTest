@@ -21,5 +21,15 @@ namespace HotelApplication.Forms.Auth
         {
             InitializeComponent();
         }
+
+        private void minimizeBtn_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

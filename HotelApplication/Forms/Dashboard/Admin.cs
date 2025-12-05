@@ -1,6 +1,6 @@
 ﻿using HotelApp.UI.Components;
 using HotelApplication.Components;
-using HotelApplicationTest.Forms.Dashboard;
+using HotelApplication.Forms.Dashboard;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,32 +16,30 @@ namespace HotelApplication.Forms.Dashboard
 {
     public partial class Admin : UserControl
     {
-        private Panel pnlUserView;
         private DataGridView dgvUsers;
         private UITextBox txtSearchUsers;
+        private Panel pnlOverlay;
 
         public Admin()
         {
             InitializeComponent();
-
-            // Setup the view directly
-            InitializeUserManagementView();
+            SetupStandardUI();
             LoadMockUserData();
 
-            // Add the user view to the control immediately
-            pnlUserView.Dock = DockStyle.Fill;
-            this.Controls.Add(pnlUserView);
+            pnlOverlay = new Panel { Dock = DockStyle.Fill, BackColor = Color.FromArgb(180, 0, 0, 0), Visible = false };
+            pnlOverlay.Click += (s, e) => HideModal();
+            this.Controls.Add(pnlOverlay);
+            pnlOverlay.BringToFront();
         }
 
-        private void InitializeUserManagementView()
+        private void SetupStandardUI()
         {
-            pnlUserView = new Panel { Dock = DockStyle.Fill, BackColor = HotelPalette.MainBackground };
+            this.Dock = DockStyle.Fill;
+            this.BackColor = HotelPalette.MainBackground;
 
             // 1. Header
             Panel pnlHeader = new Panel { Height = 60, Dock = DockStyle.Top, Padding = new Padding(20) };
-
             Label lblTitle = new Label { Text = "Staff Directory", Font = new Font("Segoe UI", 16, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 15), AutoSize = true };
-
             pnlHeader.Controls.Add(lblTitle);
 
             // 2. Filter Bar
@@ -49,16 +47,16 @@ namespace HotelApplication.Forms.Dashboard
 
             int currentX = 20;
 
-            txtSearchUsers = new UITextBox { PlaceholderText = "Search staff...", Size = new Size(250, 35), Location = new Point(currentX, 12), BorderRadius = 15, ForeColor = HotelPalette.TextPrimary };
-            // Add Search Event
+            txtSearchUsers = new UITextBox { PlaceholderText = "Search staff...", Size = new Size(300, 35), Location = new Point(currentX, 12), BorderRadius = 15, ForeColor = HotelPalette.TextPrimary };
+            // Search
             txtSearchUsers._TextChanged += (s, e) => SearchData(txtSearchUsers.Text);
 
-            currentX += 250 + 20;
+            currentX += 300 + 20;
 
             RoundedButton btnAdd = new RoundedButton { Text = "Add Staff", BackColor = HotelPalette.Accent, ForeColor = HotelPalette.TextPrimary, Size = new Size(130, 35), Location = new Point(currentX, 12), BorderRadius = 15, Font = new Font("Segoe UI", 10) };
+            btnAdd.Click += (s, e) => ShowAddModal();
 
             pnlFilter.Controls.Add(txtSearchUsers);
-
             pnlFilter.Controls.Add(btnAdd);
 
             // 3. Grid Content
@@ -76,9 +74,9 @@ namespace HotelApplication.Forms.Dashboard
 
             pnlContent.Controls.Add(dgvUsers);
 
-            pnlUserView.Controls.Add(pnlContent);
-            pnlUserView.Controls.Add(pnlFilter);
-            pnlUserView.Controls.Add(pnlHeader);
+            this.Controls.Add(pnlContent);
+            this.Controls.Add(pnlFilter);
+            this.Controls.Add(pnlHeader);
         }
 
         private void LoadMockUserData()
@@ -117,6 +115,70 @@ namespace HotelApplication.Forms.Dashboard
                 }
                 row.Visible = isVisible;
             }
+        }
+
+        // --- NEW MODAL FUNCTIONALITY ---
+        private void ShowAddModal()
+        {
+            pnlOverlay.Controls.Clear();
+            pnlOverlay.Visible = true;
+            pnlOverlay.BringToFront();
+
+            // Modal Card
+            Panel modal = new Panel { Size = new Size(400, 380), BackColor = HotelPalette.Surface, Location = new Point((this.Width - 400) / 2, (this.Height - 380) / 2) };
+
+            // Title
+            Label title = new Label { Text = "Add New Staff", Font = new Font("Segoe UI", 18, FontStyle.Bold), ForeColor = HotelPalette.TextPrimary, Location = new Point(20, 20), AutoSize = true };
+
+            // 1. Name
+            Label lblName = new Label { Text = "Full Name", Font = new Font("Segoe UI", 10), ForeColor = HotelPalette.TextSecondary, Location = new Point(20, 70), AutoSize = true };
+            UITextBox txtName = new UITextBox { PlaceholderText = "Enter name", Location = new Point(20, 95), Size = new Size(360, 35), BorderRadius = 10, ForeColor = HotelPalette.TextPrimary };
+
+            // 2. Role
+            Label lblRole = new Label { Text = "Position / Role", Font = new Font("Segoe UI", 10), ForeColor = HotelPalette.TextSecondary, Location = new Point(20, 145), AutoSize = true };
+            ComboBox cmbRole = new ComboBox { Location = new Point(20, 170), Size = new Size(360, 30), DropDownStyle = ComboBoxStyle.DropDownList, FlatStyle = FlatStyle.Flat, BackColor = HotelPalette.MainBackground, ForeColor = HotelPalette.TextPrimary, Font = new Font("Segoe UI", 10) };
+            cmbRole.Items.AddRange(new object[] { "Manager", "Receptionist", "Housekeeping", "Security", "Chef" });
+            cmbRole.SelectedIndex = 1;
+
+            // 3. ID
+            Label lblID = new Label { Text = "Staff ID", Font = new Font("Segoe UI", 10), ForeColor = HotelPalette.TextSecondary, Location = new Point(20, 220), AutoSize = true };
+            UITextBox txtID = new UITextBox { PlaceholderText = "e.g. 104", Location = new Point(20, 245), Size = new Size(360, 35), BorderRadius = 10, ForeColor = HotelPalette.TextPrimary };
+
+            // Buttons
+            RoundedButton btnSave = new RoundedButton { Text = "Save Staff", BackColor = HotelPalette.Accent, Size = new Size(150, 40), Location = new Point(230, 320) };
+            btnSave.Click += (s, e) => {
+                if (!string.IsNullOrWhiteSpace(txtName.Text) && !string.IsNullOrWhiteSpace(txtID.Text))
+                {
+                    dgvUsers.Rows.Add(txtID.Text, txtName.Text, cmbRole.SelectedItem.ToString());
+                    HideModal();
+                }
+                else
+                {
+                    MessageBox.Show("Please fill in all fields.");
+                }
+            };
+
+            RoundedButton btnClose = new RoundedButton { Text = "Cancel", BackColor = Color.FromArgb(60, 60, 60), Size = new Size(100, 40), Location = new Point(20, 320) };
+            btnClose.Click += (s, e) => HideModal();
+
+            // Add controls to modal
+            modal.Controls.Add(title);
+            modal.Controls.Add(lblName);
+            modal.Controls.Add(txtName);
+            modal.Controls.Add(lblRole);
+            modal.Controls.Add(cmbRole);
+            modal.Controls.Add(lblID);
+            modal.Controls.Add(txtID);
+            modal.Controls.Add(btnSave);
+            modal.Controls.Add(btnClose);
+
+            pnlOverlay.Controls.Add(modal);
+        }
+
+        private void HideModal()
+        {
+            pnlOverlay.Visible = false;
+            pnlOverlay.Controls.Clear();
         }
     }
 }

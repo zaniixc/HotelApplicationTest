@@ -1,5 +1,3 @@
-using HotelApplication.Forms.Dashboard;
-
 namespace HotelApplication
 {
     internal static class Program
